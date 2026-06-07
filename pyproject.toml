@@ -1,0 +1,11 @@
+[project]
+name = "ai-investment-case"
+version = "0.1.0"
+description = "AI investment course case study: machine-learning-ready multi-asset ETF dataset and preprocessing pipeline."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy>=2.4.6",
+    "pandas>=3.0.3",
+    "yfinance>=1.4.1",
+]

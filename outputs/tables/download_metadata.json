@@ -1,0 +1,88 @@
+{
+  "download_config": {
+    "tickers": [
+      "SPY",
+      "QQQ",
+      "TLT",
+      "GLD",
+      "VNQ",
+      "DBC"
+    ],
+    "start": "2018-01-01",
+    "end": "2026-06-01",
+    "interval": "1d",
+    "auto_adjust": false,
+    "generated_at_utc": "2026-06-07T15:09:51+00:00",
+    "source": "Yahoo Finance historical market data",
+    "tool": "Yahoo Chart API",
+    "fallback_used": true
+  },
+  "quality_summary": {
+    "tickers": [
+      "SPY",
+      "QQQ",
+      "TLT",
+      "GLD",
+      "VNQ",
+      "DBC"
+    ],
+    "all_row_counts_equal": true,
+    "row_counts": {
+      "SPY": 2113,
+      "QQQ": 2113,
+      "TLT": 2113,
+      "GLD": 2113,
+      "VNQ": 2113,
+      "DBC": 2113
+    },
+    "missing_counts": {
+      "SPY": 0,
+      "QQQ": 0,
+      "TLT": 0,
+      "GLD": 0,
+      "VNQ": 0,
+      "DBC": 0
+    },
+    "first_dates": {
+      "SPY": "2018-01-02",
+      "QQQ": "2018-01-02",
+      "TLT": "2018-01-02",
+      "GLD": "2018-01-02",
+      "VNQ": "2018-01-02",
+      "DBC": "2018-01-02"
+    },
+    "last_dates": {
+      "SPY": "2026-05-29",
+      "QQQ": "2026-05-29",
+      "TLT": "2026-05-29",
+      "GLD": "2026-05-29",
+      "VNQ": "2026-05-29",
+      "DBC": "2026-05-29"
+    },
+    "expected_first_trading_day": "2018-01-02",
+    "expected_last_trading_day": "2026-05-29",
+    "all_start_dates_match_expected": true,
+    "all_end_dates_match_expected": true,
+    "duplicate_dates": 0,
+    "shared_complete_price_rows": 2113,
+    "raw_shape": [
+      2113,
+      36
+    ],
+    "adj_close_shape": [
+      2113,
+      6
+    ],
+    "daily_returns_shape": [
+      2113,
+      6
+    ],
+    "quality_pass": true
+  },
+  "artifacts": {
+    "raw_prices": "data/raw/etf_prices_raw.csv",
+    "adj_close": "data/processed/prices_adj_close.csv",
+    "daily_returns": "data/processed/daily_returns.csv",
+    "quality_check": "outputs/tables/data_quality_check.csv"
+  }
+}

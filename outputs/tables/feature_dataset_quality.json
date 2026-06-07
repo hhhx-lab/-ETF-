@@ -1,0 +1,124 @@
+{
+  "feature_config": {
+    "horizon_days": 21,
+    "tickers": [
+      "SPY",
+      "QQQ",
+      "TLT",
+      "GLD",
+      "VNQ",
+      "DBC"
+    ],
+    "generated_at_utc": "2026-06-07T15:10:05+00:00",
+    "split_rule": "train <= 2022-12-31, valid <= 2023-12-31, test >= 2024-01-01",
+    "feature_lag_rule": "All features use prices, returns, and volume observed at or before sample date.",
+    "label_rule": "Forward 21-trading-day return and cross-sectional relative labels."
+  },
+  "quality_summary": {
+    "horizon_days": 21,
+    "tickers": [
+      "SPY",
+      "QQQ",
+      "TLT",
+      "GLD",
+      "VNQ",
+      "DBC"
+    ],
+    "feature_names": [
+      "ret_5d",
+      "ret_20d",
+      "ret_60d",
+      "ret_120d",
+      "vol_20d",
+      "vol_60d",
+      "downside_vol_60d",
+      "drawdown_20d",
+      "drawdown_60d",
+      "ma_ratio_20_60",
+      "ma_ratio_60_120",
+      "volume_chg_20d",
+      "risk_adj_ret_20d",
+      "risk_adj_ret_60d",
+      "asset_mean_ret_60d",
+      "rank_ret_20d",
+      "rank_ret_60d",
+      "rank_vol_60d",
+      "rank_drawdown_60d",
+      "z_ret_20d",
+      "z_ret_60d",
+      "z_vol_60d"
+    ],
+    "label_names": [
+      "future_return_21d",
+      "future_rank_21d",
+      "label_outperform_median_21d",
+      "label_top2_21d",
+      "label_positive_21d"
+    ],
+    "first_feature_available_date": "2018-06-25",
+    "last_label_available_date": "2026-04-29",
+    "daily_modeling_shape": [
+      11832,
+      31
+    ],
+    "monthly_rebalance_shape": [
+      390,
+      31
+    ],
+    "features_shape": [
+      11832,
+      26
+    ],
+    "labels_shape": [
+      11832,
+      7
+    ],
+    "split_counts_daily": {
+      "train": 6834,
+      "test": 3498,
+      "valid": 1500
+    },
+    "split_counts_monthly": {
+      "train": 228,
+      "test": 108,
+      "valid": 54
+    },
+    "ticker_counts_daily": {
+      "DBC": 1972,
+      "GLD": 1972,
+      "QQQ": 1972,
+      "SPY": 1972,
+      "TLT": 1972,
+      "VNQ": 1972
+    },
+    "ticker_counts_monthly": {
+      "DBC": 65,
+      "GLD": 65,
+      "QQQ": 65,
+      "SPY": 65,
+      "TLT": 65,
+      "VNQ": 65
+    },
+    "label_positive_rates": {
+      "label_outperform_median_21d": 0.5,
+      "label_top2_21d": 0.3333333333333333,
+      "label_positive_21d": 0.6040398918187965
+    },
+    "monthly_label_positive_rates": {
+      "label_outperform_median_21d": 0.5,
+      "label_top2_21d": 0.3333333333333333,
+      "label_positive_21d": 0.6051282051282051
+    },
+    "no_missing_features_in_modeling": true,
+    "no_missing_labels_in_modeling": true
+  },
+  "artifacts": {
+    "daily_modeling_dataset": "data/processed/modeling_dataset_daily.csv",
+    "plan_modeling_dataset": "data/processed/modeling_dataset.csv",
+    "monthly_rebalance_dataset": "data/processed/modeling_dataset_monthly_rebalance.csv",
+    "daily_features": "data/processed/daily_features.csv",
+    "daily_labels": "data/processed/daily_labels.csv",
+    "monthly_features": "data/processed/monthly_features.csv",
+    "monthly_labels": "data/processed/monthly_labels.csv"
+  }
+}
