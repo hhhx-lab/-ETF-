@@ -1,0 +1,784 @@
+{
+  "generated_at_utc": "2026-06-08T18:13:12+00:00",
+  "artifacts": {
+    "etf_risk_return_metrics": "outputs/tables/etf_risk_return_metrics.csv",
+    "spo_candidate_portfolios": "outputs/tables/spo_candidate_portfolios.csv",
+    "ai_prompt_payload": "outputs/tables/ai_prompt_payload.json",
+    "ai_risk_profile_weights": "outputs/tables/ai_risk_profile_weights.csv",
+    "ai_risk_profile_backtest_returns": "outputs/tables/ai_risk_profile_backtest_returns.csv",
+    "ai_risk_profile_portfolios": "outputs/tables/ai_risk_profile_portfolios.json",
+    "ai_risk_profile_validation": "outputs/tables/ai_risk_profile_validation.json",
+    "portfolio_backtest_metrics": "outputs/tables/portfolio_backtest_metrics.csv"
+  },
+  "validation": {
+    "ai_weight_checks_ok": true,
+    "ai_risk_constraints_all_met": false,
+    "ai_risk_constraints_or_fallbacks_ok": true,
+    "risk_constraint_fallback_count": 2,
+    "ai_json_profiles": [
+      "low_risk",
+      "medium_risk",
+      "high_risk"
+    ],
+    "metrics_finite_ok": true,
+    "weight_checks": [
+      {
+        "date": "2024-01-31",
+        "strategy": "ai_high_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2024-01-31",
+        "strategy": "ai_low_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2024-01-31",
+        "strategy": "ai_medium_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2024-02-29",
+        "strategy": "ai_high_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2024-02-29",
+        "strategy": "ai_low_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2024-02-29",
+        "strategy": "ai_medium_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2024-03-28",
+        "strategy": "ai_high_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2024-03-28",
+        "strategy": "ai_low_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2024-03-28",
+        "strategy": "ai_medium_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2024-04-30",
+        "strategy": "ai_high_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2024-04-30",
+        "strategy": "ai_low_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2024-04-30",
+        "strategy": "ai_medium_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2024-05-31",
+        "strategy": "ai_high_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2024-05-31",
+        "strategy": "ai_low_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2024-05-31",
+        "strategy": "ai_medium_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2024-06-28",
+        "strategy": "ai_high_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2024-06-28",
+        "strategy": "ai_low_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2024-06-28",
+        "strategy": "ai_medium_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2024-07-31",
+        "strategy": "ai_high_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2024-07-31",
+        "strategy": "ai_low_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2024-07-31",
+        "strategy": "ai_medium_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2024-08-30",
+        "strategy": "ai_high_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2024-08-30",
+        "strategy": "ai_low_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2024-08-30",
+        "strategy": "ai_medium_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2024-09-30",
+        "strategy": "ai_high_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2024-09-30",
+        "strategy": "ai_low_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2024-09-30",
+        "strategy": "ai_medium_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2024-10-31",
+        "strategy": "ai_high_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2024-10-31",
+        "strategy": "ai_low_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2024-10-31",
+        "strategy": "ai_medium_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2024-11-29",
+        "strategy": "ai_high_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2024-11-29",
+        "strategy": "ai_low_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2024-11-29",
+        "strategy": "ai_medium_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2024-12-31",
+        "strategy": "ai_high_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2024-12-31",
+        "strategy": "ai_low_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2024-12-31",
+        "strategy": "ai_medium_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2025-01-31",
+        "strategy": "ai_high_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2025-01-31",
+        "strategy": "ai_low_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2025-01-31",
+        "strategy": "ai_medium_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2025-02-28",
+        "strategy": "ai_high_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2025-02-28",
+        "strategy": "ai_low_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2025-02-28",
+        "strategy": "ai_medium_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2025-03-31",
+        "strategy": "ai_high_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2025-03-31",
+        "strategy": "ai_low_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2025-03-31",
+        "strategy": "ai_medium_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2025-04-30",
+        "strategy": "ai_high_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2025-04-30",
+        "strategy": "ai_low_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": false,
+        "fallback_reason": "fallback_to_minimum_volatility"
+      },
+      {
+        "date": "2025-04-30",
+        "strategy": "ai_medium_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2025-05-30",
+        "strategy": "ai_high_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2025-05-30",
+        "strategy": "ai_low_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": false,
+        "fallback_reason": "fallback_to_minimum_volatility"
+      },
+      {
+        "date": "2025-05-30",
+        "strategy": "ai_medium_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2025-06-30",
+        "strategy": "ai_high_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2025-06-30",
+        "strategy": "ai_low_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2025-06-30",
+        "strategy": "ai_medium_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2025-07-31",
+        "strategy": "ai_high_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2025-07-31",
+        "strategy": "ai_low_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2025-07-31",
+        "strategy": "ai_medium_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2025-08-29",
+        "strategy": "ai_high_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2025-08-29",
+        "strategy": "ai_low_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2025-08-29",
+        "strategy": "ai_medium_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2025-09-30",
+        "strategy": "ai_high_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2025-09-30",
+        "strategy": "ai_low_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2025-09-30",
+        "strategy": "ai_medium_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2025-10-31",
+        "strategy": "ai_high_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2025-10-31",
+        "strategy": "ai_low_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2025-10-31",
+        "strategy": "ai_medium_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2025-11-28",
+        "strategy": "ai_high_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2025-11-28",
+        "strategy": "ai_low_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2025-11-28",
+        "strategy": "ai_medium_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2025-12-31",
+        "strategy": "ai_high_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2025-12-31",
+        "strategy": "ai_low_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2025-12-31",
+        "strategy": "ai_medium_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2026-01-30",
+        "strategy": "ai_high_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2026-01-30",
+        "strategy": "ai_low_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2026-01-30",
+        "strategy": "ai_medium_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2026-02-27",
+        "strategy": "ai_high_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2026-02-27",
+        "strategy": "ai_low_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2026-02-27",
+        "strategy": "ai_medium_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2026-03-31",
+        "strategy": "ai_high_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2026-03-31",
+        "strategy": "ai_low_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2026-03-31",
+        "strategy": "ai_medium_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2026-04-29",
+        "strategy": "ai_high_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2026-04-29",
+        "strategy": "ai_low_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      },
+      {
+        "date": "2026-04-29",
+        "strategy": "ai_medium_risk",
+        "sum_ok": true,
+        "long_only_ok": true,
+        "single_weight_cap_ok": true,
+        "volatility_cap_ok": true,
+        "fallback_reason": "risk_constraint_satisfied"
+      }
+    ]
+  },
+  "disclaimer": "本项目仅用于课程案例研究，不构成任何投资建议。"
+}

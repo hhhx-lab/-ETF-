@@ -1,0 +1,1080 @@
+{
+  "generated_at_utc": "2026-06-08T18:13:08+00:00",
+  "conda_environment": "etf-spo",
+  "command": "conda run -n etf-spo python src/reproduce_spo_paper.py",
+  "paper": {
+    "paper": "Smart Predict--then--Optimize Paradigm for Portfolio Optimization in Real Markets",
+    "arxiv_id": "2601.04062v3",
+    "authors": [
+      "Wang Yi",
+      "Takashi Hasuike"
+    ],
+    "paper_source_downloaded_from": "https://arxiv.org/e-print/2601.04062",
+    "paper_source_contents": [
+      "00README.json",
+      "main.tex",
+      "ref.bib",
+      "figures/*.pdf",
+      "figures/*.png"
+    ],
+    "official_experiment_code_status": "No Python experiment code or GitHub repository link was included in the arXiv source package. The paper states that PyEPO is used to implement SPO loss, so this reproduction uses the official PyEPO codebase.",
+    "pyepo_source": "https://github.com/khalil-research/PyEPO"
+  },
+  "implementation": {
+    "codebase": "PyEPO installed editable from external/PyEPO/pkg",
+    "optimizer": "MaxReturn long-only LP solved exactly by custom PyEPO optModel",
+    "loss": "PyEPO SPOPlus",
+    "predictor": "linear PyTorch model",
+    "baselines": [
+      "Ridge predict-then-Markowitz",
+      "6 ETF equal weight",
+      "SPY buy-and-hold"
+    ],
+    "transaction_cost_rate": 0.005,
+    "monthly_rebalancing": true
+  },
+  "data": {
+    "tickers": [
+      "SPY",
+      "QQQ",
+      "TLT",
+      "GLD",
+      "VNQ",
+      "DBC"
+    ],
+    "feature_count": 22,
+    "train_valid_months": 67,
+    "test_months": 28,
+    "test_start": "2024-01-31",
+    "test_end": "2026-04-29"
+  },
+  "validation": {
+    "prediction_rows_ok": true,
+    "expected_prediction_rows": 168,
+    "actual_prediction_rows": 168,
+    "weight_checks_ok": true,
+    "metrics_finite_ok": true,
+    "weight_checks": [
+      {
+        "date": "2024-01-31",
+        "strategy": "equal_weight_6etf",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-01-31",
+        "strategy": "pto_markowitz",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-01-31",
+        "strategy": "spo_plus",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-01-31",
+        "strategy": "spo_plus_fee",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-01-31",
+        "strategy": "spo_plus_turnover_l2",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-01-31",
+        "strategy": "spy_buy_hold",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-02-29",
+        "strategy": "equal_weight_6etf",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-02-29",
+        "strategy": "pto_markowitz",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-02-29",
+        "strategy": "spo_plus",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-02-29",
+        "strategy": "spo_plus_fee",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-02-29",
+        "strategy": "spo_plus_turnover_l2",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-02-29",
+        "strategy": "spy_buy_hold",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-03-28",
+        "strategy": "equal_weight_6etf",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-03-28",
+        "strategy": "pto_markowitz",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-03-28",
+        "strategy": "spo_plus",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-03-28",
+        "strategy": "spo_plus_fee",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-03-28",
+        "strategy": "spo_plus_turnover_l2",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-03-28",
+        "strategy": "spy_buy_hold",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-04-30",
+        "strategy": "equal_weight_6etf",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-04-30",
+        "strategy": "pto_markowitz",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-04-30",
+        "strategy": "spo_plus",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-04-30",
+        "strategy": "spo_plus_fee",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-04-30",
+        "strategy": "spo_plus_turnover_l2",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-04-30",
+        "strategy": "spy_buy_hold",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-05-31",
+        "strategy": "equal_weight_6etf",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-05-31",
+        "strategy": "pto_markowitz",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-05-31",
+        "strategy": "spo_plus",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-05-31",
+        "strategy": "spo_plus_fee",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-05-31",
+        "strategy": "spo_plus_turnover_l2",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-05-31",
+        "strategy": "spy_buy_hold",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-06-28",
+        "strategy": "equal_weight_6etf",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-06-28",
+        "strategy": "pto_markowitz",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-06-28",
+        "strategy": "spo_plus",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-06-28",
+        "strategy": "spo_plus_fee",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-06-28",
+        "strategy": "spo_plus_turnover_l2",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-06-28",
+        "strategy": "spy_buy_hold",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-07-31",
+        "strategy": "equal_weight_6etf",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-07-31",
+        "strategy": "pto_markowitz",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-07-31",
+        "strategy": "spo_plus",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-07-31",
+        "strategy": "spo_plus_fee",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-07-31",
+        "strategy": "spo_plus_turnover_l2",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-07-31",
+        "strategy": "spy_buy_hold",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-08-30",
+        "strategy": "equal_weight_6etf",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-08-30",
+        "strategy": "pto_markowitz",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-08-30",
+        "strategy": "spo_plus",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-08-30",
+        "strategy": "spo_plus_fee",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-08-30",
+        "strategy": "spo_plus_turnover_l2",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-08-30",
+        "strategy": "spy_buy_hold",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-09-30",
+        "strategy": "equal_weight_6etf",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-09-30",
+        "strategy": "pto_markowitz",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-09-30",
+        "strategy": "spo_plus",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-09-30",
+        "strategy": "spo_plus_fee",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-09-30",
+        "strategy": "spo_plus_turnover_l2",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-09-30",
+        "strategy": "spy_buy_hold",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-10-31",
+        "strategy": "equal_weight_6etf",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-10-31",
+        "strategy": "pto_markowitz",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-10-31",
+        "strategy": "spo_plus",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-10-31",
+        "strategy": "spo_plus_fee",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-10-31",
+        "strategy": "spo_plus_turnover_l2",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-10-31",
+        "strategy": "spy_buy_hold",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-11-29",
+        "strategy": "equal_weight_6etf",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-11-29",
+        "strategy": "pto_markowitz",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-11-29",
+        "strategy": "spo_plus",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-11-29",
+        "strategy": "spo_plus_fee",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-11-29",
+        "strategy": "spo_plus_turnover_l2",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-11-29",
+        "strategy": "spy_buy_hold",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-12-31",
+        "strategy": "equal_weight_6etf",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-12-31",
+        "strategy": "pto_markowitz",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-12-31",
+        "strategy": "spo_plus",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-12-31",
+        "strategy": "spo_plus_fee",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-12-31",
+        "strategy": "spo_plus_turnover_l2",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2024-12-31",
+        "strategy": "spy_buy_hold",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-01-31",
+        "strategy": "equal_weight_6etf",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-01-31",
+        "strategy": "pto_markowitz",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-01-31",
+        "strategy": "spo_plus",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-01-31",
+        "strategy": "spo_plus_fee",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-01-31",
+        "strategy": "spo_plus_turnover_l2",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-01-31",
+        "strategy": "spy_buy_hold",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-02-28",
+        "strategy": "equal_weight_6etf",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-02-28",
+        "strategy": "pto_markowitz",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-02-28",
+        "strategy": "spo_plus",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-02-28",
+        "strategy": "spo_plus_fee",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-02-28",
+        "strategy": "spo_plus_turnover_l2",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-02-28",
+        "strategy": "spy_buy_hold",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-03-31",
+        "strategy": "equal_weight_6etf",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-03-31",
+        "strategy": "pto_markowitz",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-03-31",
+        "strategy": "spo_plus",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-03-31",
+        "strategy": "spo_plus_fee",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-03-31",
+        "strategy": "spo_plus_turnover_l2",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-03-31",
+        "strategy": "spy_buy_hold",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-04-30",
+        "strategy": "equal_weight_6etf",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-04-30",
+        "strategy": "pto_markowitz",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-04-30",
+        "strategy": "spo_plus",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-04-30",
+        "strategy": "spo_plus_fee",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-04-30",
+        "strategy": "spo_plus_turnover_l2",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-04-30",
+        "strategy": "spy_buy_hold",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-05-30",
+        "strategy": "equal_weight_6etf",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-05-30",
+        "strategy": "pto_markowitz",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-05-30",
+        "strategy": "spo_plus",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-05-30",
+        "strategy": "spo_plus_fee",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-05-30",
+        "strategy": "spo_plus_turnover_l2",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-05-30",
+        "strategy": "spy_buy_hold",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-06-30",
+        "strategy": "equal_weight_6etf",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-06-30",
+        "strategy": "pto_markowitz",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-06-30",
+        "strategy": "spo_plus",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-06-30",
+        "strategy": "spo_plus_fee",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-06-30",
+        "strategy": "spo_plus_turnover_l2",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-06-30",
+        "strategy": "spy_buy_hold",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-07-31",
+        "strategy": "equal_weight_6etf",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-07-31",
+        "strategy": "pto_markowitz",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-07-31",
+        "strategy": "spo_plus",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-07-31",
+        "strategy": "spo_plus_fee",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-07-31",
+        "strategy": "spo_plus_turnover_l2",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-07-31",
+        "strategy": "spy_buy_hold",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-08-29",
+        "strategy": "equal_weight_6etf",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-08-29",
+        "strategy": "pto_markowitz",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-08-29",
+        "strategy": "spo_plus",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-08-29",
+        "strategy": "spo_plus_fee",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-08-29",
+        "strategy": "spo_plus_turnover_l2",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-08-29",
+        "strategy": "spy_buy_hold",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-09-30",
+        "strategy": "equal_weight_6etf",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-09-30",
+        "strategy": "pto_markowitz",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-09-30",
+        "strategy": "spo_plus",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-09-30",
+        "strategy": "spo_plus_fee",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-09-30",
+        "strategy": "spo_plus_turnover_l2",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-09-30",
+        "strategy": "spy_buy_hold",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-10-31",
+        "strategy": "equal_weight_6etf",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-10-31",
+        "strategy": "pto_markowitz",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-10-31",
+        "strategy": "spo_plus",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-10-31",
+        "strategy": "spo_plus_fee",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-10-31",
+        "strategy": "spo_plus_turnover_l2",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-10-31",
+        "strategy": "spy_buy_hold",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-11-28",
+        "strategy": "equal_weight_6etf",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-11-28",
+        "strategy": "pto_markowitz",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-11-28",
+        "strategy": "spo_plus",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-11-28",
+        "strategy": "spo_plus_fee",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-11-28",
+        "strategy": "spo_plus_turnover_l2",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-11-28",
+        "strategy": "spy_buy_hold",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-12-31",
+        "strategy": "equal_weight_6etf",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-12-31",
+        "strategy": "pto_markowitz",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-12-31",
+        "strategy": "spo_plus",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-12-31",
+        "strategy": "spo_plus_fee",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-12-31",
+        "strategy": "spo_plus_turnover_l2",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2025-12-31",
+        "strategy": "spy_buy_hold",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2026-01-30",
+        "strategy": "equal_weight_6etf",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2026-01-30",
+        "strategy": "pto_markowitz",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2026-01-30",
+        "strategy": "spo_plus",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2026-01-30",
+        "strategy": "spo_plus_fee",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2026-01-30",
+        "strategy": "spo_plus_turnover_l2",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2026-01-30",
+        "strategy": "spy_buy_hold",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2026-02-27",
+        "strategy": "equal_weight_6etf",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2026-02-27",
+        "strategy": "pto_markowitz",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2026-02-27",
+        "strategy": "spo_plus",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2026-02-27",
+        "strategy": "spo_plus_fee",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2026-02-27",
+        "strategy": "spo_plus_turnover_l2",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2026-02-27",
+        "strategy": "spy_buy_hold",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2026-03-31",
+        "strategy": "equal_weight_6etf",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2026-03-31",
+        "strategy": "pto_markowitz",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2026-03-31",
+        "strategy": "spo_plus",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2026-03-31",
+        "strategy": "spo_plus_fee",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2026-03-31",
+        "strategy": "spo_plus_turnover_l2",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2026-03-31",
+        "strategy": "spy_buy_hold",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2026-04-29",
+        "strategy": "equal_weight_6etf",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2026-04-29",
+        "strategy": "pto_markowitz",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2026-04-29",
+        "strategy": "spo_plus",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2026-04-29",
+        "strategy": "spo_plus_fee",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2026-04-29",
+        "strategy": "spo_plus_turnover_l2",
+        "sum_ok": true,
+        "long_only_ok": true
+      },
+      {
+        "date": "2026-04-29",
+        "strategy": "spy_buy_hold",
+        "sum_ok": true,
+        "long_only_ok": true
+      }
+    ]
+  },
+  "artifacts": {
+    "paper_source_manifest": "external/paper_2601_04062_source_manifest.json",
+    "downloaded_codebase": "external/PyEPO",
+    "spo_prediction_scores": "outputs/tables/spo_prediction_scores.csv",
+    "spo_portfolio_weights": "outputs/tables/spo_portfolio_weights.csv",
+    "spo_backtest_returns": "outputs/tables/spo_backtest_returns.csv",
+    "portfolio_backtest_metrics": "outputs/tables/portfolio_backtest_metrics.csv",
+    "spo_model_metrics": "outputs/tables/spo_model_metrics.csv",
+    "spo_training_history": "outputs/tables/spo_training_history.csv",
+    "spo_reproduction_metadata": "outputs/tables/spo_reproduction_metadata.json"
+  },
+  "disclaimer": "本项目仅用于课程案例研究，不构成任何投资建议。"
+}

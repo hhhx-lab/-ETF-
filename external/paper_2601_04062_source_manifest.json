@@ -1,0 +1,18 @@
+{
+  "paper": "Smart Predict--then--Optimize Paradigm for Portfolio Optimization in Real Markets",
+  "arxiv_id": "2601.04062v3",
+  "authors": [
+    "Wang Yi",
+    "Takashi Hasuike"
+  ],
+  "paper_source_downloaded_from": "https://arxiv.org/e-print/2601.04062",
+  "paper_source_contents": [
+    "00README.json",
+    "main.tex",
+    "ref.bib",
+    "figures/*.pdf",
+    "figures/*.png"
+  ],
+  "official_experiment_code_status": "No Python experiment code or GitHub repository link was included in the arXiv source package. The paper states that PyEPO is used to implement SPO loss, so this reproduction uses the official PyEPO codebase.",
+  "pyepo_source": "https://github.com/khalil-research/PyEPO"
+}

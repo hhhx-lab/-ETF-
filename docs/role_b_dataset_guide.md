@@ -137,7 +137,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, roc_auc_score
 
-root = Path("/Users/hwaigc/workspace/投资学/ai_investment_case")
+root = Path(".")
 data = pd.read_csv(root / "data/processed/modeling_dataset.csv", parse_dates=["date"])
 meta = json.loads((root / "outputs/tables/feature_dataset_quality.json").read_text())
 
