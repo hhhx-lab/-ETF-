@@ -33,10 +33,10 @@
 
 ## 2. 可复现数据获取命令
 
-项目目录：
+从仓库根目录运行：
 
 ```bash
-cd /Users/hwaigc/workspace/投资学/ai_investment_case
+cd -ETF-
 ```
 
 依赖环境由 `uv` 管理。角色 A 已安装最小数据依赖：

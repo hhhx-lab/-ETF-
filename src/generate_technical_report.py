@@ -1,0 +1,397 @@
+from __future__ import annotations
+
+import argparse
+import json
+from pathlib import Path
+from typing import Any
+
+import pandas as pd
+
+
+REPORT_PATH = "docs/technical_report.md"
+TICKERS = ["SPY", "QQQ", "TLT", "GLD", "VNQ", "DBC"]
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Generate the course technical report from reproducible outputs."
+    )
+    parser.add_argument(
+        "--output",
+        default=REPORT_PATH,
+        help="Relative path for the generated markdown technical report.",
+    )
+    return parser.parse_args()
+
+
+def project_root() -> Path:
+    return Path(__file__).resolve().parents[1]
+
+
+def pct(value: float) -> str:
+    return f"{value * 100:.2f}%"
+
+
+def num(value: float) -> str:
+    return f"{value:.2f}"
+
+
+def read_json(path: Path) -> dict[str, Any]:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def metrics_row(metrics: pd.DataFrame, strategy: str, return_type: str = "net") -> pd.Series:
+    row = metrics[(metrics["strategy"] == strategy) & (metrics["return_type"] == return_type)]
+    if row.empty:
+        raise ValueError(f"Missing metrics row for {strategy}/{return_type}")
+    return row.iloc[0]
+
+
+def metric_table(metrics: pd.DataFrame, strategies: list[str]) -> str:
+    lines = [
+        "| 策略 | 口径 | 总收益 | 年化收益 | 年化波动 | Sharpe | 最大回撤 | 胜率 | 平均换手 |",
+        "|---|---|---:|---:|---:|---:|---:|---:|---:|",
+    ]
+    for strategy in strategies:
+        row = metrics_row(metrics, strategy, "net")
+        lines.append(
+            "| "
+            + " | ".join(
+                [
+                    f"`{strategy}`",
+                    "net",
+                    pct(float(row["total_return"])),
+                    pct(float(row["annual_return"])),
+                    pct(float(row["annual_volatility"])),
+                    num(float(row["sharpe"])),
+                    pct(float(row["max_drawdown"])),
+                    pct(float(row["win_rate"])),
+                    num(float(row["average_turnover"])),
+                ]
+            )
+            + " |"
+        )
+    return "\n".join(lines)
+
+
+def etf_metric_table(etf_metrics: pd.DataFrame) -> str:
+    lines = [
+        "| ETF | SPO 排名 | PtO 预测 21 日收益 | 历史年化收益 | 年化波动 | 最大回撤 | Sharpe | 21 日动量 | 60 日动量 |",
+        "|---|---:|---:|---:|---:|---:|---:|---:|---:|",
+    ]
+    for _, row in etf_metrics.sort_values("spo_predicted_rank").iterrows():
+        lines.append(
+            "| "
+            + " | ".join(
+                [
+                    f"`{row['ticker']}`",
+                    str(int(row["spo_predicted_rank"])),
+                    pct(float(row["expected_return_21d_pto"])),
+                    pct(float(row["historical_annual_return"])),
+                    pct(float(row["annual_volatility"])),
+                    pct(float(row["max_drawdown"])),
+                    num(float(row["sharpe"])),
+                    pct(float(row["momentum_21d"])),
+                    pct(float(row["momentum_60d"])),
+                ]
+            )
+            + " |"
+        )
+    return "\n".join(lines)
+
+
+def ai_profile_table(ai_json: dict[str, Any]) -> str:
+    lines = [
+        "| 风险档位 | 权重 | 预期年化收益 | 预期年化波动 | 预期 Sharpe | 校验状态 |",
+        "|---|---|---:|---:|---:|---|",
+    ]
+    for profile in ai_json["risk_profiles"]:
+        weights = ", ".join(
+            f"{ticker} {weight:.1%}"
+            for ticker, weight in profile["weights"].items()
+            if abs(float(weight)) > 1e-8
+        )
+        validation = profile["constraint_validation"]
+        ok = (
+            validation["weight_sum_ok"]
+            and validation["long_only_ok"]
+            and validation["single_etf_cap_ok"]
+            and validation["volatility_cap_ok"]
+        )
+        status = "通过" if ok else f"回退：{validation['fallback_reason']}"
+        lines.append(
+            "| "
+            + " | ".join(
+                [
+                    profile["profile_label"],
+                    weights,
+                    pct(float(profile["expected_annual_return"])),
+                    pct(float(profile["expected_annual_volatility"])),
+                    num(float(profile["expected_sharpe"])),
+                    status,
+                ]
+            )
+            + " |"
+        )
+    return "\n".join(lines)
+
+
+def model_metric_table(model_metrics: pd.DataFrame) -> str:
+    lines = [
+        "| 模型 | split | RMSE | MAE | R2 | Rank IC |",
+        "|---|---|---:|---:|---:|---:|",
+    ]
+    for _, row in model_metrics.sort_values(["split", "model_name"]).iterrows():
+        lines.append(
+            "| "
+            + " | ".join(
+                [
+                    f"`{row['model_name']}`",
+                    str(row["split"]),
+                    f"{float(row['rmse']):.4f}",
+                    f"{float(row['mae']):.4f}",
+                    f"{float(row['r2']):.4f}",
+                    f"{float(row['rank_ic']):.4f}",
+                ]
+            )
+            + " |"
+        )
+    return "\n".join(lines)
+
+
+def candidate_snapshot_table(candidates: pd.DataFrame, decision_date: str) -> str:
+    latest = candidates[candidates["date"] == decision_date].copy()
+    latest = latest.sort_values("expected_annual_return", ascending=False)
+    lines = [
+        "| 候选策略 | 预期年化收益 | 预期年化波动 | 真实未来 21 日收益 | 最大单资产权重 | 主要 ETF |",
+        "|---|---:|---:|---:|---:|---|",
+    ]
+    for _, row in latest.iterrows():
+        lines.append(
+            "| "
+            + " | ".join(
+                [
+                    f"`{row['candidate_strategy']}`",
+                    pct(float(row["expected_annual_return"])),
+                    pct(float(row["expected_annual_volatility"])),
+                    pct(float(row["actual_future_return_21d"])),
+                    pct(float(row["max_single_weight"])),
+                    f"`{row['dominant_etf']}`",
+                ]
+            )
+            + " |"
+        )
+    return "\n".join(lines)
+
+
+def build_report(root: Path) -> str:
+    metrics = pd.read_csv(root / "outputs" / "tables" / "portfolio_backtest_metrics.csv")
+    etf_metrics = pd.read_csv(root / "outputs" / "tables" / "etf_risk_return_metrics.csv")
+    model_metrics = pd.read_csv(root / "outputs" / "tables" / "spo_model_metrics.csv")
+    candidates = pd.read_csv(root / "outputs" / "tables" / "spo_candidate_portfolios.csv")
+    feature_meta = read_json(root / "outputs" / "tables" / "feature_dataset_quality.json")
+    spo_meta = read_json(root / "outputs" / "tables" / "spo_reproduction_metadata.json")
+    ai_json = read_json(root / "outputs" / "tables" / "ai_risk_profile_portfolios.json")
+    ai_validation = read_json(root / "outputs" / "tables" / "ai_risk_profile_validation.json")
+
+    decision_date = ai_json["decision_date"]
+    test_start = spo_meta["data"]["test_start"]
+    test_end = spo_meta["data"]["test_end"]
+    test_months = spo_meta["data"]["test_months"]
+    feature_count = spo_meta["data"]["feature_count"]
+    daily_shape = feature_meta["quality_summary"]["daily_modeling_shape"]
+    monthly_shape = feature_meta["quality_summary"]["monthly_rebalance_shape"]
+    ai_low = metrics_row(metrics, "ai_low_risk", "net")
+    ai_medium = metrics_row(metrics, "ai_medium_risk", "net")
+    ai_high = metrics_row(metrics, "ai_high_risk", "net")
+    best_ai = max(
+        [("低风险", ai_low), ("中风险", ai_medium), ("高风险", ai_high)],
+        key=lambda item: float(item[1]["sharpe"]),
+    )
+
+    report = f"""# 技术报告：基于 SPO 与 AI 提示决策的多风险 ETF 组合优化
+
+## 摘要
+
+本项目围绕“运用 AI 技术进行优化投资组合配置，构建最优资产配置策略，进行风险评估和收益预测，提高投资组合整体绩效”的课程目标，构建了一套可复现的 ETF 组合优化流程。项目先从 Yahoo Finance 获取 6 只 ETF 的日度行情，生成 22 个历史特征和未来 21 日收益标签；随后采用 Smart Predict--then--Optimize, SPO 范式训练预测-优化模型，使预测目标直接服务于下游组合决策；最后把 SPO 候选组合、ETF 单体风险收益指标和风险偏好约束输入 AI 决策层，生成低风险、中风险和高风险三类投资组合建议。
+
+当前测试区间为 {test_start} 至 {test_end}，共 {test_months} 个真实交易月末。交易成本后，AI 低风险组合年化收益为 {pct(float(ai_low['annual_return']))}、年化波动为 {pct(float(ai_low['annual_volatility']))}、Sharpe 为 {num(float(ai_low['sharpe']))}；AI 中风险组合年化收益为 {pct(float(ai_medium['annual_return']))}、年化波动为 {pct(float(ai_medium['annual_volatility']))}、Sharpe 为 {num(float(ai_medium['sharpe']))}；AI 高风险组合年化收益为 {pct(float(ai_high['annual_return']))}、年化波动为 {pct(float(ai_high['annual_volatility']))}、Sharpe 为 {num(float(ai_high['sharpe']))}。其中，按净值 Sharpe 看，当前表现最好的是 {best_ai[0]}组合。
+
+本项目仅用于课程案例研究，不构成任何投资建议。
+
+## 1. 研究目标与总体方案
+
+传统机器学习投资组合项目容易只关注预测准确率，例如分类准确率、AUC 或点预测误差。但投资组合配置的最终目标不是预测本身，而是在风险约束和交易成本约束下生成更好的资产权重。因此，本项目采用“算法预测 + AI 优化投资建议”的双层结构：
+
+1. 数据层：构建 ETF 价格、收益率、特征和标签数据集；
+2. SPO 算法层：训练面向组合决策质量的预测-优化模型；
+3. 候选组合层：生成 SPO、普通 PtO、等权和 SPY 买入持有等组合；
+4. 风险收益评估层：计算 ETF 单体和组合层面的收益、波动、回撤、Sharpe、换手率；
+5. AI 决策层：基于结构化数据和风险偏好生成三档投资组合建议；
+6. 校验层：对 AI 输出的权重和风险指标进行程序化复算。
+
+## 2. 数据与特征工程
+
+资产池为 `SPY`、`QQQ`、`TLT`、`GLD`、`VNQ`、`DBC`，覆盖美国股票、成长股、长期国债、黄金、房地产和大宗商品。样本区间为 2018-01-02 至 2026-05-29。
+
+当前日度建模主集规模为 {daily_shape[0]} 行、{daily_shape[1]} 列；月末调仓样本规模为 {monthly_shape[0]} 行、{monthly_shape[1]} 列。模型使用 {feature_count} 个历史特征，包括多窗口收益率、波动率、下行波动率、最大回撤、均线比率、成交量变化、风险调整收益和横截面排名。标签使用未来 21 个交易日收益，接近一个月持有期。
+
+数据与特征相关文件：
+
+| 文件 | 说明 |
+|---|---|
+| `data/processed/modeling_dataset.csv` | 日度资产-日期建模主集 |
+| `data/processed/modeling_dataset_monthly_rebalance.csv` | 月末调仓样本 |
+| `outputs/tables/feature_dataset_quality.json` | 特征和标签质量摘要 |
+| `docs/data_source_and_preprocessing.md` | 数据来源与预处理说明 |
+| `docs/role_b_dataset_guide.md` | 模型数据集使用说明 |
+
+## 3. 算法方法：Smart Predict--then--Optimize
+
+本项目使用 Wang Yi 和 Takashi Hasuike 的 2026 年论文 *Smart Predict--then--Optimize Paradigm for Portfolio Optimization in Real Markets* 作为主要方法依据。该论文强调预测模型应直接服务于下游投资组合优化，而不是只追求点预测误差最小。本仓库已经下载论文 arXiv 源码包到 `external/paper_2601_04062_source/`。源码包中没有 Python 实验代码或 GitHub 仓库链接，因此本项目根据论文正文说明，使用 PyEPO 官方代码作为 SPO loss 实现基础。
+
+当前算法实现位于 `src/reproduce_spo_paper.py`，核心流程如下：
+
+1. 从日度建模主集中抽取每月最后一个可交易日作为调仓日；
+2. 使用 `train + valid` 样本训练，使用 `test` 样本回测；
+3. 使用 PyTorch 线性模型预测 6 只 ETF 的未来收益分数；
+4. 使用 PyEPO `SPOPlus` loss，使预测模型学习对组合决策更有用的预测；
+5. 使用自定义 `MaxReturnOptModel` 生成 SPO 权重；
+6. 与 Ridge PtO + Markowitz、等权、SPY 买入持有等基准比较。
+
+预测层指标如下：
+
+{model_metric_table(model_metrics)}
+
+从预测层看，SPO+ 不一定在点预测误差上优于普通 PtO；但本项目的评价核心是组合层收益、风险和回撤。这与 SPO 方法的核心思想一致：预测误差不是最终目标，组合决策质量才是投资场景下的关键指标。
+
+## 4. ETF 单体风险收益评估
+
+AI 决策层需要理解每只 ETF 的独立收益和风险情况，因此项目对最新决策日 {decision_date} 的 ETF 单体指标进行了计算：
+
+{etf_metric_table(etf_metrics)}
+
+这些指标不是直接作为最终权重，而是作为 AI 决策层的结构化输入，帮助其解释为什么某些资产适合低风险组合，某些资产适合中高风险组合。
+
+## 5. SPO 候选组合
+
+在进入 AI 决策层前，程序先生成多个候选组合，包括 SPO、带交易成本和换手正则的 SPO、普通 PtO Markowitz、等权组合和 SPY 买入持有组合。最新决策日 {decision_date} 的候选组合摘要如下：
+
+{candidate_snapshot_table(candidates, decision_date)}
+
+候选组合的作用是为 AI 提供“算法已经生成的可行组合参考”，避免 AI 完全凭文字描述生成权重。
+
+## 6. AI 提示决策设计
+
+AI 决策层的输入包括三部分：
+
+1. `outputs/tables/spo_candidate_portfolios.csv`：SPO/PtO/基准候选组合；
+2. `outputs/tables/etf_risk_return_metrics.csv`：ETF 单体风险收益指标；
+3. 风险档位约束：低风险、中风险、高风险。
+
+AI 输出必须是结构化 JSON，不能只给自然语言建议。输出文件为 `outputs/tables/ai_risk_profile_portfolios.json`。提示词模板和 JSON schema 记录在 `docs/ai_prompt_design.md`。
+同时，`outputs/tables/ai_prompt_payload.json` 已保存完整 system prompt、user prompt 模板、结构化输入、输出 schema 和参考校验输出，可作为后续接入外部大模型 API 的输入载荷。
+
+当前本地实现没有绑定外部大模型 API，因此采用“结构化提示词决策 + 程序化优化器兜底”的可复现方案：先按提示词需要的结构组织数据，再由优化器生成满足约束的权重和解释字段。如果后续接入外部大模型，只需要替换决策生成部分，权重校验器和回退逻辑应保持不变。
+
+## 7. 三档风险组合建议
+
+最新决策日 {decision_date} 的 AI 三档风险组合如下：
+
+{ai_profile_table(ai_json)}
+
+解释：
+
+1. 低风险组合：目标是在年化波动率不超过 10% 的前提下最大化预期收益，单 ETF 权重上限为 35%；
+2. 中风险组合：目标是在年化波动率不超过 15% 的前提下最大化预期收益，单 ETF 权重上限为 45%；
+3. 高风险组合：目标是在年化波动率不超过 22% 的前提下最大化预期收益，单 ETF 权重上限为 60%。
+
+若某个历史调仓月无法完全满足对应波动率约束，系统不会直接输出无效结果，而是回退到同一权重上限下的最低波动组合，并在 JSON 和校验文件中标注。
+
+## 8. 回测结果
+
+组合回测使用未来 21 个交易日收益近似下一期收益，保持月度调仓。净收益按照换手率扣除 0.005 比例交易成本。核心结果如下：
+
+{metric_table(metrics, ['ai_low_risk', 'ai_medium_risk', 'ai_high_risk', 'spo_plus_turnover_l2', 'equal_weight_6etf', 'spy_buy_hold', 'pto_markowitz'])}
+
+结果显示，AI 三档组合在当前测试区间内都取得了较高的风险调整后表现。其中低风险组合的最大回撤较小，中风险组合在净收益和 Sharpe 之间较为均衡，高风险组合承担了更高换手和回撤风险，但仍保持较高年化收益。需要强调的是，这些结果基于历史样本回测，不代表未来收益。
+
+## 9. 程序化校验
+
+本项目对 AI 输出进行程序化校验，结果记录在 `outputs/tables/ai_risk_profile_validation.json`。当前校验摘要：
+
+| 校验项 | 当前结果 |
+|---|---|
+| AI 权重和、非负、单资产上限 | {str(ai_validation['validation']['ai_weight_checks_ok'])} |
+| 所有历史调仓月完全满足波动率上限 | {str(ai_validation['validation']['ai_risk_constraints_all_met'])} |
+| 波动率约束满足或已按规则回退 | {str(ai_validation['validation']['ai_risk_constraints_or_fallbacks_ok'])} |
+| 风险约束回退次数 | {ai_validation['validation']['risk_constraint_fallback_count']} |
+| 回测指标为有限数值 | {str(ai_validation['validation']['metrics_finite_ok'])} |
+
+同时，`outputs/tables/spo_reproduction_metadata.json` 校验了 SPO 预测输出：测试期共有 168 条预测，即 28 个测试月乘以 6 只 ETF；各策略权重非负且每月权重和为 1。
+
+## 10. 结论
+
+本项目已经从原始数据下载、特征工程、SPO 预测-优化、组合回测、ETF 风险收益评估、AI 三档风险建议到程序化校验形成完整闭环。相较只训练逻辑回归或随机森林的普通机器学习流程，本设计更贴近投资组合优化问题本身：模型输出不仅是预测分数，而且能进入组合权重生成、风险评估和投资建议解释。
+
+本项目的主要贡献包括：
+
+1. 将 SPO 范式落地到本地 6 ETF 数据集；
+2. 输出可复算的预测分数、候选组合、组合权重和回测指标；
+3. 设计 AI 提示词和 JSON 输出格式，让 AI 基于结构化数据生成不同风险偏好的投资建议；
+4. 用程序化校验约束 AI 输出，避免只依赖文本解释；
+5. 提供 conda 环境文件和复现命令，保证课程报告结果可复现。
+
+## 11. 局限性
+
+1. 论文 arXiv 源码包没有提供 Python 实验代码，本项目使用论文正文提到的 PyEPO 框架复现核心 SPO+ 路径，不能声称复刻作者全部实验；
+2. 资产池只有 6 只 ETF，覆盖主要资产类别，但不等同于完整市场资产池；
+3. 当前实现未复现论文中的 RobustSPO、SoftmaxDFL 和 Optuna 滚动调参；
+4. AI 决策层当前采用可复现的本地结构化决策与优化器兜底，尚未接入外部大模型 API；
+5. 回测样本有限，历史表现不代表未来收益。
+
+## 12. 复现命令
+
+```bash
+uv run python src/download_data.py
+uv run python src/features.py
+conda env create -f environment/etf-spo.yml
+conda run -n etf-spo python src/reproduce_spo_paper.py
+conda run -n etf-spo python src/generate_ai_risk_profiles.py
+conda run -n etf-spo python src/generate_technical_report.py
+```
+
+如果 `etf-spo` 环境已经存在，可跳过 `conda env create`。
+
+## 13. 主要文件清单
+
+| 文件 | 说明 |
+|---|---|
+| `src/reproduce_spo_paper.py` | SPO+ 训练、预测、组合权重和回测 |
+| `src/generate_ai_risk_profiles.py` | ETF 单体指标、候选组合和 AI 三档风险组合 |
+| `src/generate_technical_report.py` | 根据输出表自动生成本技术报告 |
+| `environment/etf-spo.yml` | conda 环境配置 |
+| `docs/final_strategy_design.md` | 最终策略设计 |
+| `docs/ai_prompt_design.md` | AI 提示词设计 |
+| `docs/role_c_implementation_summary.md` | 角色 C 工作总结 |
+| `outputs/tables/portfolio_backtest_metrics.csv` | 全部组合回测指标 |
+| `outputs/tables/ai_prompt_payload.json` | AI 提示词载荷 |
+| `outputs/tables/ai_risk_profile_portfolios.json` | AI 三档组合建议 |
+
+本项目仅用于课程案例研究，不构成任何投资建议。
+"""
+    return report
+
+
+def main() -> None:
+    args = parse_args()
+    root = project_root()
+    report = build_report(root)
+    output_path = root / args.output
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(report, encoding="utf-8")
+    print(f"Wrote {args.output}")
+
+
+if __name__ == "__main__":
+    main()
