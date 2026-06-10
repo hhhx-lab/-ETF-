@@ -54,7 +54,9 @@ uv run python src/download_data.py
 uv run python src/features.py
 conda run -n etf-spo python src/reproduce_spo_paper.py
 conda run -n etf-spo python src/generate_ai_risk_profiles.py
-conda run -n etf-spo python src/generate_technical_report.py
+conda run -n etf-spo python test/backtest_existing_models.py --cost-rate 0.005
+conda run -n etf-spo python scripts/generate_case_report.py
+codex-docx-to-pdf docs/案例报告/AI投资学课程案例报告.docx docs/案例报告
 ```
 
 ## 4. 核心输出
@@ -71,7 +73,9 @@ conda run -n etf-spo python src/generate_technical_report.py
 | `outputs/tables/ai_risk_profile_weights.csv` | AI 低/中/高风险组合月度权重 |
 | `outputs/tables/portfolio_backtest_metrics.csv` | 全部组合和基准的回测指标总表 |
 | `outputs/tables/ai_risk_profile_validation.json` | AI 组合校验结果 |
-| `docs/technical_report.md` | 算法预测与 AI 投资建议完整技术报告 |
+| `docs/案例报告/AI投资学课程案例报告.md` | 正式案例报告 Markdown 源稿 |
+| `docs/案例报告/AI投资学课程案例报告.docx` | 正式案例报告 Word 可编辑稿 |
+| `docs/案例报告/AI投资学课程案例报告.pdf` | 正式案例报告 PDF 交付稿 |
 
 ## 5. 当前回测结果
 

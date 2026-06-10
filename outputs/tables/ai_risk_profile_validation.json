@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-06-10T04:58:02+00:00",
+  "generated_at_utc": "2026-06-10T17:58:34+00:00",
   "artifacts": {
     "etf_risk_return_metrics": "outputs/tables/etf_risk_return_metrics.csv",
     "spo_candidate_portfolios": "outputs/tables/spo_candidate_portfolios.csv",

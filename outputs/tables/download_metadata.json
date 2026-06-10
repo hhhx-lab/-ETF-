@@ -12,7 +12,7 @@
     "end": "2026-06-01",
     "interval": "1d",
     "auto_adjust": false,
-    "generated_at_utc": "2026-06-07T15:09:51+00:00",
+    "generated_at_utc": "2026-06-10T17:57:01+00:00",
     "source": "Yahoo Finance historical market data",
     "tool": "Yahoo Chart API",
     "fallback_used": true

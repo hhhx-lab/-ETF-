@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-06-10T04:57:45+00:00",
+  "generated_at_utc": "2026-06-10T17:57:44+00:00",
   "conda_environment": "etf-spo",
   "command": "conda run -n etf-spo python src/reproduce_spo_paper.py",
   "paper": {

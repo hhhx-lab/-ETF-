@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-06-10T04:58:02+00:00",
+  "generated_at_utc": "2026-06-10T17:58:34+00:00",
   "decision_date": "2026-04-29",
   "ai_generation_mode": "structured_prompt_decision_with_programmatic_optimizer_fallback; all weights are validated and risk metrics are recomputed by code",
   "source_files": [
@@ -12,48 +12,48 @@
     "spo_candidates": [
       {
         "candidate_strategy": "equal_weight_6etf",
-        "expected_annual_return": 0.2184733908536742,
-        "expected_annual_volatility": 0.08902039807644292,
-        "actual_future_return_21d": 0.023291036108275893,
+        "expected_annual_return": 0.21847414741467083,
+        "expected_annual_volatility": 0.0890203870244124,
+        "actual_future_return_21d": 0.02329103610827589,
         "max_single_weight": 0.1666666666666666,
         "dominant_etf": "SPY"
       },
       {
         "candidate_strategy": "pto_markowitz",
-        "expected_annual_return": 0.31434210312160504,
-        "expected_annual_volatility": 0.0704694212935893,
-        "actual_future_return_21d": 0.015479714574208997,
-        "max_single_weight": 0.4472539488374801,
+        "expected_annual_return": 0.3143366205447224,
+        "expected_annual_volatility": 0.07046857894110672,
+        "actual_future_return_21d": 0.015478302342419752,
+        "max_single_weight": 0.4472741003111716,
         "dominant_etf": "TLT"
       },
       {
         "candidate_strategy": "spo_plus",
-        "expected_annual_return": 0.6478820575991632,
-        "expected_annual_volatility": 0.18005463962436158,
+        "expected_annual_return": 0.647882807202122,
+        "expected_annual_volatility": 0.18005463962436155,
         "actual_future_return_21d": -0.0514800623059272,
         "max_single_weight": 1.0,
         "dominant_etf": "DBC"
       },
       {
         "candidate_strategy": "spo_plus_fee",
-        "expected_annual_return": 0.6478820575991578,
-        "expected_annual_volatility": 0.18005463962435939,
-        "actual_future_return_21d": -0.05148006230592551,
-        "max_single_weight": 0.9999999999999872,
+        "expected_annual_return": 0.647882807202121,
+        "expected_annual_volatility": 0.18005463962436125,
+        "actual_future_return_21d": -0.051480062305926944,
+        "max_single_weight": 0.9999999999999978,
         "dominant_etf": "DBC"
       },
       {
         "candidate_strategy": "spo_plus_turnover_l2",
-        "expected_annual_return": 0.6478820575991597,
-        "expected_annual_volatility": 0.1800546396243606,
-        "actual_future_return_21d": -0.05148006230592677,
-        "max_single_weight": 0.999999999999994,
+        "expected_annual_return": 0.6478828072021207,
+        "expected_annual_volatility": 0.18005463962436066,
+        "actual_future_return_21d": -0.05148006230592642,
+        "max_single_weight": 0.9999999999999954,
         "dominant_etf": "DBC"
       },
       {
         "candidate_strategy": "spy_buy_hold",
-        "expected_annual_return": 0.08689701977224776,
-        "expected_annual_volatility": 0.12447144763302037,
+        "expected_annual_return": 0.08690405532312478,
+        "expected_annual_volatility": 0.1244714122352525,
         "actual_future_return_21d": 0.0630989670753479,
         "max_single_weight": 1.0,
         "dominant_etf": "SPY"
@@ -104,9 +104,9 @@
         "VNQ": 0.3,
         "DBC": 0.35
       },
-      "expected_annual_return": 0.385331,
+      "expected_annual_return": 0.385328,
       "expected_annual_volatility": 0.092356,
-      "expected_sharpe": 4.17225,
+      "expected_sharpe": 4.172223,
       "historical_risk_check": {
         "historical_annual_return": 0.129769,
         "historical_annual_volatility": 0.163696,
@@ -141,13 +141,13 @@
         "VNQ": 0.1,
         "DBC": 0.45
       },
-      "expected_annual_return": 0.464437,
+      "expected_annual_return": 0.464433,
       "expected_annual_volatility": 0.105594,
-      "expected_sharpe": 4.398323,
+      "expected_sharpe": 4.398292,
       "historical_risk_check": {
         "historical_annual_return": 0.14788,
         "historical_annual_volatility": 0.164808,
-        "historical_sharpe": 0.897287,
+        "historical_sharpe": 0.897286,
         "historical_max_drawdown": -0.282017
       },
       "constraint_validation": {
@@ -178,9 +178,9 @@
         "VNQ": 0.0,
         "DBC": 0.6
       },
-      "expected_annual_return": 0.532768,
+      "expected_annual_return": 0.532765,
       "expected_annual_volatility": 0.120787,
-      "expected_sharpe": 4.410793,
+      "expected_sharpe": 4.410769,
       "historical_risk_check": {
         "historical_annual_return": 0.146418,
         "historical_annual_volatility": 0.163707,

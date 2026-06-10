@@ -9,7 +9,7 @@
       "VNQ",
       "DBC"
     ],
-    "generated_at_utc": "2026-06-07T15:10:05+00:00",
+    "generated_at_utc": "2026-06-10T17:57:25+00:00",
     "split_rule": "train <= 2022-12-31, valid <= 2023-12-31, test >= 2024-01-01",
     "feature_lag_rule": "All features use prices, returns, and volume observed at or before sample date.",
     "label_rule": "Forward 21-trading-day return and cross-sectional relative labels."

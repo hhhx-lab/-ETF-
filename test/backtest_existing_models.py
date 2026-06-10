@@ -851,7 +851,7 @@ def build_report(
             "`turnover_t = sum(abs(weight_t - weight_{t-1}))`，"
             "`cost_t = turnover_t * cost_rate`，"
             "`net_return_t = gross_return_t - cost_t`。"
-            "主结果使用课程建议范围内的 0.10% 单边成本；敏感性表额外给出 "
+            f"主结果使用 {args.cost_rate:.2%} 单边成本；敏感性表额外给出 "
             "0%、0.05%、0.10%、0.25%、0.50%、1.00%。"
         ),
         "",

@@ -1,7 +1,7 @@
 {
-  "generated_at_utc": "2026-06-10T05:00:01+00:00",
+  "generated_at_utc": "2026-06-10T18:11:59+00:00",
   "all_checks_passed": true,
-  "input_dir": "C:\\Users\\31745\\Documents\\Codex\\2026-06-10\\hhhx-lab-etf-git-https-github\\work\\ETF-repo\\outputs\\tables",
+  "input_dir": "/Users/hwaigc/workspace/投资学/ai_investment_case/outputs/tables",
   "feature_count": 22,
   "split_rule": "train <= 2022-12-31, valid <= 2023-12-31, test >= 2024-01-01",
   "model_fit_rule": "PtO Ridge and SPO+ are fit on train split only; valid is used for diagnostics.",
