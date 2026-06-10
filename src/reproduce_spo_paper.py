@@ -229,15 +229,15 @@ def true_solutions(costs: np.ndarray, optmodel: MaxReturnOptModel) -> tuple[np.n
 
 
 def train_pto_ridge(
-    train_panel: pd.DataFrame,
+    panel: pd.DataFrame,
     feature_cols: list[str],
     monthly_index: pd.DataFrame,
     x: np.ndarray,
 ) -> np.ndarray:
     models: dict[str, Pipeline] = {}
     for ticker in TICKERS:
-        ticker_train = train_panel[
-            (train_panel["split"].isin(["train", "valid"])) & (train_panel["ticker"] == ticker)
+        ticker_train = panel[
+            (panel["split"] == "train") & (panel["ticker"] == ticker)
         ]
         model = Pipeline([("scaler", StandardScaler()), ("ridge", Ridge(alpha=1.0))])
         model.fit(ticker_train[feature_cols], ticker_train[TARGET_COL])
@@ -246,7 +246,7 @@ def train_pto_ridge(
     pred_rows = []
     for _, row in monthly_index.iterrows():
         date = row["date"]
-        group = train_panel[train_panel["date"] == date].set_index("ticker").reindex(TICKERS)
+        group = panel[panel["date"] == date].set_index("ticker").reindex(TICKERS)
         pred_rows.append(
             [
                 float(models[ticker].predict(group.loc[[ticker], feature_cols])[0])
@@ -584,11 +584,12 @@ def main() -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
 
     monthly_panel, returns, _, feature_cols = load_data(root)
-    train_valid_panel = monthly_panel[monthly_panel["split"].isin(["train", "valid"])]
+    train_panel = monthly_panel[monthly_panel["split"] == "train"]
+    valid_panel = monthly_panel[monthly_panel["split"] == "valid"]
     test_panel = monthly_panel[monthly_panel["split"] == "test"]
 
-    tv_index, x_tv, y_tv, scaler = panel_to_monthly_tensors(
-        train_valid_panel,
+    train_index, x_train, y_train, scaler = panel_to_monthly_tensors(
+        train_panel,
         feature_cols,
         fit_scaler=True,
     )
@@ -599,7 +600,7 @@ def main() -> None:
         fit_scaler=False,
     )
     valid_index, x_valid, y_valid, _ = panel_to_monthly_tensors(
-        monthly_panel[monthly_panel["split"] == "valid"],
+        valid_panel,
         feature_cols,
         scaler=scaler,
         fit_scaler=False,
@@ -608,7 +609,7 @@ def main() -> None:
     pto_pred_test = train_pto_ridge(monthly_panel, feature_cols, test_index, x_test)
     pto_pred_valid = train_pto_ridge(monthly_panel, feature_cols, valid_index, x_valid)
 
-    spo_model, training_history = train_spo_plus(x_tv, y_tv, x_valid, y_valid, args)
+    spo_model, training_history = train_spo_plus(x_train, y_train, x_valid, y_valid, args)
     spo_model.eval()
     with torch.no_grad():
         spo_pred_test = spo_model(torch.tensor(x_test, dtype=torch.float32)).numpy()
@@ -697,10 +698,14 @@ def main() -> None:
         "data": {
             "tickers": TICKERS,
             "feature_count": len(feature_cols),
-            "train_valid_months": int(len(tv_index)),
+            "train_months": int(len(train_index)),
+            "valid_months": int(len(valid_index)),
+            "train_valid_months": int(len(train_index) + len(valid_index)),
             "test_months": int(len(test_index)),
             "test_start": str(test_index["date"].min().date()),
             "test_end": str(test_index["date"].max().date()),
+            "scaler_fit_rule": "StandardScaler is fit on train split only; valid and test are transformed.",
+            "model_fit_rule": "PtO Ridge and SPO+ are fit on train split only; valid is used for diagnostics.",
         },
         "validation": validation,
         "artifacts": artifacts,

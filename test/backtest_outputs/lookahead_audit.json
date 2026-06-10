@@ -1,0 +1,37 @@
+{
+  "generated_at_utc": "2026-06-10T05:00:01+00:00",
+  "all_checks_passed": true,
+  "input_dir": "C:\\Users\\31745\\Documents\\Codex\\2026-06-10\\hhhx-lab-etf-git-https-github\\work\\ETF-repo\\outputs\\tables",
+  "feature_count": 22,
+  "split_rule": "train <= 2022-12-31, valid <= 2023-12-31, test >= 2024-01-01",
+  "model_fit_rule": "PtO Ridge and SPO+ are fit on train split only; valid is used for diagnostics.",
+  "metadata_test_start": "2024-01-31",
+  "metadata_test_end": "2026-04-29",
+  "checks": [
+    {
+      "rule": "t month-end features only use data observed at or before sample date",
+      "status": true,
+      "evidence": "All features use prices, returns, and volume observed at or before sample date."
+    },
+    {
+      "rule": "t month-end features predict t+1 month / forward 21-trading-day returns",
+      "status": true,
+      "evidence": "Forward 21-trading-day return and cross-sectional relative labels."
+    },
+    {
+      "rule": "portfolio return uses the next-period realized return already stored as future_return_21d",
+      "status": true,
+      "evidence": "backtest_dates=2024-01-31..2026-04-29, test_label_dates=2024-01-31..2026-04-29"
+    },
+    {
+      "rule": "StandardScaler is fit on train split only, then transforms validation and test",
+      "status": true,
+      "evidence": "StandardScaler is fit on train split only; valid and test are transformed."
+    },
+    {
+      "rule": "split dates keep test data after training/validation period",
+      "status": true,
+      "evidence": "train_valid_end=2023-11-30, test_start=2024-01-31"
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-06-08T18:13:08+00:00",
+  "generated_at_utc": "2026-06-10T04:57:45+00:00",
   "conda_environment": "etf-spo",
   "command": "conda run -n etf-spo python src/reproduce_spo_paper.py",
   "paper": {
@@ -43,10 +43,14 @@
       "DBC"
     ],
     "feature_count": 22,
+    "train_months": 55,
+    "valid_months": 12,
     "train_valid_months": 67,
     "test_months": 28,
     "test_start": "2024-01-31",
-    "test_end": "2026-04-29"
+    "test_end": "2026-04-29",
+    "scaler_fit_rule": "StandardScaler is fit on train split only; valid and test are transformed.",
+    "model_fit_rule": "PtO Ridge and SPO+ are fit on train split only; valid is used for diagnostics."
   },
   "validation": {
     "prediction_rows_ok": true,

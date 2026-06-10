@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-06-08T18:13:12+00:00",
+  "generated_at_utc": "2026-06-10T04:58:02+00:00",
   "decision_date": "2026-04-29",
   "ai_generation_mode": "structured_prompt_decision_with_programmatic_optimizer_fallback; all weights are validated and risk metrics are recomputed by code",
   "source_files": [
@@ -12,57 +12,57 @@
     "spo_candidates": [
       {
         "candidate_strategy": "equal_weight_6etf",
-        "expected_annual_return": 0.24299143700924603,
+        "expected_annual_return": 0.2184733908536742,
         "expected_annual_volatility": 0.08902039807644292,
-        "actual_future_return_21d": 0.02329103610827589,
+        "actual_future_return_21d": 0.023291036108275893,
         "max_single_weight": 0.1666666666666666,
         "dominant_etf": "SPY"
       },
       {
         "candidate_strategy": "pto_markowitz",
-        "expected_annual_return": 0.6036683263644138,
-        "expected_annual_volatility": 0.11783673467225254,
-        "actual_future_return_21d": 0.05739666766537152,
-        "max_single_weight": 0.6501002154390669,
-        "dominant_etf": "QQQ"
+        "expected_annual_return": 0.31434210312160504,
+        "expected_annual_volatility": 0.0704694212935893,
+        "actual_future_return_21d": 0.015479714574208997,
+        "max_single_weight": 0.4472539488374801,
+        "dominant_etf": "TLT"
       },
       {
         "candidate_strategy": "spo_plus",
-        "expected_annual_return": -0.05749142774210533,
-        "expected_annual_volatility": 0.10106147742561461,
-        "actual_future_return_21d": 0.0043954374268651,
+        "expected_annual_return": 0.6478820575991632,
+        "expected_annual_volatility": 0.18005463962436158,
+        "actual_future_return_21d": -0.0514800623059272,
         "max_single_weight": 1.0,
-        "dominant_etf": "TLT"
+        "dominant_etf": "DBC"
       },
       {
         "candidate_strategy": "spo_plus_fee",
-        "expected_annual_return": -0.05749142774210525,
-        "expected_annual_volatility": 0.10106147742561455,
-        "actual_future_return_21d": 0.004395437426865101,
-        "max_single_weight": 0.9999999999999992,
-        "dominant_etf": "TLT"
+        "expected_annual_return": 0.6478820575991578,
+        "expected_annual_volatility": 0.18005463962435939,
+        "actual_future_return_21d": -0.05148006230592551,
+        "max_single_weight": 0.9999999999999872,
+        "dominant_etf": "DBC"
       },
       {
         "candidate_strategy": "spo_plus_turnover_l2",
-        "expected_annual_return": -0.057491427742104716,
-        "expected_annual_volatility": 0.10106147742561447,
-        "actual_future_return_21d": 0.004395437426865046,
-        "max_single_weight": 0.9999999999999992,
-        "dominant_etf": "TLT"
+        "expected_annual_return": 0.6478820575991597,
+        "expected_annual_volatility": 0.1800546396243606,
+        "actual_future_return_21d": -0.05148006230592677,
+        "max_single_weight": 0.999999999999994,
+        "dominant_etf": "DBC"
       },
       {
         "candidate_strategy": "spy_buy_hold",
-        "expected_annual_return": 0.23671445209441364,
-        "expected_annual_volatility": 0.12447144763302039,
+        "expected_annual_return": 0.08689701977224776,
+        "expected_annual_volatility": 0.12447144763302037,
         "actual_future_return_21d": 0.0630989670753479,
         "max_single_weight": 1.0,
         "dominant_etf": "SPY"
       }
     ],
     "spo_top_ranked_assets": [
-      "TLT",
       "DBC",
-      "SPY"
+      "TLT",
+      "QQQ"
     ],
     "risk_profiles": {
       "low_risk": {
@@ -97,21 +97,21 @@
         "weight_sum": 1.0
       },
       "weights": {
-        "SPY": 0.239429,
+        "SPY": 0.0,
         "QQQ": 0.35,
-        "TLT": 0.060571,
+        "TLT": 0.0,
         "GLD": 0.0,
-        "VNQ": 0.0,
+        "VNQ": 0.3,
         "DBC": 0.35
       },
-      "expected_annual_return": 0.473998,
-      "expected_annual_volatility": 0.1,
-      "expected_sharpe": 4.739981,
+      "expected_annual_return": 0.385331,
+      "expected_annual_volatility": 0.092356,
+      "expected_sharpe": 4.17225,
       "historical_risk_check": {
-        "historical_annual_return": 0.144673,
-        "historical_annual_volatility": 0.157628,
-        "historical_sharpe": 0.917809,
-        "historical_max_drawdown": -0.261848
+        "historical_annual_return": 0.129769,
+        "historical_annual_volatility": 0.163696,
+        "historical_sharpe": 0.792741,
+        "historical_max_drawdown": -0.312325
       },
       "constraint_validation": {
         "weight_sum_ok": true,
@@ -121,7 +121,7 @@
         "fallback_reason": "risk_constraint_satisfied"
       },
       "risk_note": "组合以降低波动和回撤为主，收益目标服从风险约束。",
-      "allocation_reason": "优先控制波动和回撤，偏向 TLT、GLD 等防御资产。 当前 SPO 排名前三资产为 TLT、DBC、SPY；最终权重集中在 QQQ 35.0%、DBC 35.0%、SPY 23.9%，并通过程序化约束校验。"
+      "allocation_reason": "优先控制波动和回撤，偏向 TLT、GLD 等防御资产。 当前 SPO 排名前三资产为 DBC、TLT、QQQ；最终权重集中在 QQQ 35.0%、DBC 35.0%、VNQ 30.0%，并通过程序化约束校验。"
     },
     {
       "profile": "medium_risk",
@@ -134,21 +134,21 @@
         "weight_sum": 1.0
       },
       "weights": {
-        "SPY": 0.1,
+        "SPY": 0.0,
         "QQQ": 0.45,
         "TLT": 0.0,
         "GLD": 0.0,
-        "VNQ": 0.0,
+        "VNQ": 0.1,
         "DBC": 0.45
       },
-      "expected_annual_return": 0.564705,
-      "expected_annual_volatility": 0.111409,
-      "expected_sharpe": 5.06875,
+      "expected_annual_return": 0.464437,
+      "expected_annual_volatility": 0.105594,
+      "expected_sharpe": 4.398323,
       "historical_risk_check": {
-        "historical_annual_return": 0.155513,
-        "historical_annual_volatility": 0.168289,
-        "historical_sharpe": 0.924085,
-        "historical_max_drawdown": -0.275036
+        "historical_annual_return": 0.14788,
+        "historical_annual_volatility": 0.164808,
+        "historical_sharpe": 0.897287,
+        "historical_max_drawdown": -0.282017
       },
       "constraint_validation": {
         "weight_sum_ok": true,
@@ -158,7 +158,7 @@
         "fallback_reason": "risk_constraint_satisfied"
       },
       "risk_note": "组合在收益资产和防御资产之间折中，追求风险调整后收益。",
-      "allocation_reason": "在权益、债券、黄金、房地产和商品之间均衡配置。 当前 SPO 排名前三资产为 TLT、DBC、SPY；最终权重集中在 QQQ 45.0%、DBC 45.0%、SPY 10.0%，并通过程序化约束校验。"
+      "allocation_reason": "在权益、债券、黄金、房地产和商品之间均衡配置。 当前 SPO 排名前三资产为 DBC、TLT、QQQ；最终权重集中在 QQQ 45.0%、DBC 45.0%、VNQ 10.0%，并通过程序化约束校验。"
     },
     {
       "profile": "high_risk",
@@ -172,20 +172,20 @@
       },
       "weights": {
         "SPY": 0.0,
-        "QQQ": 0.6,
+        "QQQ": 0.4,
         "TLT": 0.0,
         "GLD": 0.0,
         "VNQ": 0.0,
-        "DBC": 0.4
+        "DBC": 0.6
       },
-      "expected_annual_return": 0.602827,
-      "expected_annual_volatility": 0.115684,
-      "expected_sharpe": 5.210963,
+      "expected_annual_return": 0.532768,
+      "expected_annual_volatility": 0.120787,
+      "expected_sharpe": 4.410793,
       "historical_risk_check": {
-        "historical_annual_return": 0.165706,
-        "historical_annual_volatility": 0.177226,
-        "historical_sharpe": 0.935002,
-        "historical_max_drawdown": -0.2716
+        "historical_annual_return": 0.146418,
+        "historical_annual_volatility": 0.163707,
+        "historical_sharpe": 0.894389,
+        "historical_max_drawdown": -0.277088
       },
       "constraint_validation": {
         "weight_sum_ok": true,
@@ -195,7 +195,7 @@
         "fallback_reason": "risk_constraint_satisfied"
       },
       "risk_note": "组合允许更高权益暴露，以换取更高预期收益和更大净值波动。",
-      "allocation_reason": "允许提高 SPY、QQQ 等权益和成长资产权重。 当前 SPO 排名前三资产为 TLT、DBC、SPY；最终权重集中在 QQQ 60.0%、DBC 40.0%，并通过程序化约束校验。"
+      "allocation_reason": "允许提高 SPY、QQQ 等权益和成长资产权重。 当前 SPO 排名前三资产为 DBC、TLT、QQQ；最终权重集中在 DBC 60.0%、QQQ 40.0%，并通过程序化约束校验。"
     }
   ],
   "validation_policy": "如果权重和、非负约束、单 ETF 权重上限或波动率上限校验失败，系统回退到同一约束下的最低波动组合，并在 JSON 中标注。",

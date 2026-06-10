@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-06-08T18:13:12+00:00",
+  "generated_at_utc": "2026-06-10T04:58:02+00:00",
   "artifacts": {
     "etf_risk_return_metrics": "outputs/tables/etf_risk_return_metrics.csv",
     "spo_candidate_portfolios": "outputs/tables/spo_candidate_portfolios.csv",
@@ -281,7 +281,7 @@
         "long_only_ok": true,
         "single_weight_cap_ok": true,
         "volatility_cap_ok": true,
-        "fallback_reason": "risk_constraint_satisfied"
+        "fallback_reason": "fallback_to_minimum_volatility"
       },
       {
         "date": "2024-10-31",

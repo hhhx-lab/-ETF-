@@ -1,0 +1,8 @@
+rank,strategy,strategy_group,strengths,weaknesses,recommended_use
+1,spo_plus_turnover_l2,spo_model,年化收益领先；风险调整收益强；正则化显著改善基础 SPO+ 的净值表现,主要风险来自样本期较短,适合作为 SPO 类策略的生产化起点，但需要继续降低换手。
+2,ai_low_risk,ai_risk_profile,年化收益领先；风险调整收益强；回撤控制好；换手相对可控；风险约束让波动和回撤更平滑,主要风险来自样本期较短,适合作为低波动核心组合或防守档位。
+3,ai_medium_risk,ai_risk_profile,年化收益中等偏稳；风险调整收益强；风险约束让波动和回撤更平滑,主要风险来自样本期较短,适合作为当前样本下的主组合候选，收益和风险比较均衡。
+4,ai_high_risk,ai_risk_profile,年化收益中等偏稳；风险约束让波动和回撤更平滑,换手高且交易成本敏感,适合愿意承受更高波动、追求更高收益弹性的配置。
+5,spo_plus_fee,spo_model,年化收益领先,换手高且交易成本敏感；当前输出与基础 SPO+ 几乎重合，费用项没有形成有效约束,更适合保留为消融实验基线，而非直接实盘化。
+6,spo_plus,spo_model,年化收益领先,换手高且交易成本敏感,更适合保留为消融实验基线，而非直接实盘化。
+7,pto_markowitz,predict_then_optimize,年化收益中等偏稳,回撤压力大；换手高且交易成本敏感,适合作为传统 PtO/Markowitz 对照模型，不宜忽略成本。
