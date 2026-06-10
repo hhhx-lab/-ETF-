@@ -1,7 +1,7 @@
 # Existing Model Backtest
 
 This folder is an independent backtest layer for the existing models and strategy
-outputs in this repository. It does not retrain models. It reads the current
+outputs in this repository.  It reads the current
 tables under `outputs/tables/`, recomputes portfolio metrics, compares models
 against benchmarks, and writes a standalone evaluation report.
 
