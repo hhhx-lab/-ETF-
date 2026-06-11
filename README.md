@@ -1,18 +1,20 @@
 # AI 投资学课程案例：SPO 多资产 ETF 组合优化
 
-本仓库用于《投资学》课程案例报告：**基于 Smart Predict--then--Optimize 的多资产 ETF 组合优化策略研究**。项目从 Yahoo Finance 获取 ETF 历史行情，构建机器学习特征和月度调仓样本，复现 SPO+ 决策导向学习流程，并输出可编辑 Word、PDF 和可追溯附录材料。
+本仓库用于《投资学》课程案例研究：**基于 Smart Predict--then--Optimize 的多资产 ETF 组合优化策略研究**。项目从 Yahoo Finance 获取 ETF 历史行情，构建机器学习特征和月度调仓样本，复现 SPO+ 决策导向学习流程，并输出数据、模型、组合和回测结果。
 
 本项目仅用于课程研究和方法复现，不构成任何投资建议。
 
 ## 当前交付物
 
-最终课程案例报告位于：
+课程案例报告成品保存在：
 
 | 文件 | 说明 |
 |---|---|
-| `docs/案例报告/AI投资学课程案例报告.md` | Markdown 源稿 |
-| `docs/案例报告/AI投资学课程案例报告.docx` | 可编辑 Word 正式稿 |
-| `docs/案例报告/AI投资学课程案例报告.pdf` | PDF 交付稿 |
+| `docs/案例报告/AI投资学课程案例报告.md` | 报告源稿 |
+| `docs/案例报告/AI投资学课程案例报告.docx` | Word 报告文件 |
+| `docs/案例报告/AI投资学课程案例报告.pdf` | PDF 报告文件 |
+
+说明：仓库不再保留案例报告自动化处理脚本；报告文件作为课程交付物保存，项目复现流水线只覆盖数据、模型、组合和回测。
 
 支撑文档位于 `docs/`：
 
@@ -35,16 +37,13 @@
 ├── data/
 │   ├── raw/                         # Yahoo Finance 原始价格
 │   └── processed/                   # 复权价格、收益率、特征、标签和建模面板
-├── docs/
-│   └── 案例报告/                    # 最终 Markdown / DOCX / PDF 报告
+├── docs/                            # 研究说明、案例报告和支撑文档
 ├── environment/
 │   └── etf-spo.yml                  # SPO 复现实验 Conda 环境
 ├── external/
 │   ├── PyEPO/pkg/                   # 精简保留的 PyEPO editable 安装包
 │   └── paper_2601_04062_source/     # SPO 论文 arXiv 源码材料
 ├── outputs/tables/                  # 数据、模型、组合和 AI 风险组合输出表
-├── scripts/
-│   └── generate_case_report.py      # 正式案例报告生成器
 ├── src/
 │   ├── download_data.py             # 数据下载和质量检查
 │   ├── features.py                  # 特征工程和标签构造
@@ -65,13 +64,13 @@
 uv sync
 ```
 
-SPO 训练、AI 风险组合、独立回测和报告生成使用独立 Conda 环境：
+SPO 训练、AI 风险组合和独立回测使用独立 Conda 环境：
 
 ```bash
 conda env create -f environment/etf-spo.yml
 ```
 
-如果环境已存在，可直接更新依赖：
+如果环境已存在，可直接更新 PyEPO editable 安装：
 
 ```bash
 conda run -n etf-spo python -m pip install -e external/PyEPO/pkg
@@ -89,15 +88,6 @@ conda run -n etf-spo python src/features.py
 conda run -n etf-spo python src/reproduce_spo_paper.py
 conda run -n etf-spo python src/generate_ai_risk_profiles.py
 conda run -n etf-spo python test/backtest_existing_models.py --cost-rate 0.005
-conda run -n etf-spo python scripts/generate_case_report.py
-codex-docx-to-pdf docs/案例报告/AI投资学课程案例报告.docx docs/案例报告
-```
-
-检查最终文档：
-
-```bash
-codex-docx-inspect docs/案例报告/AI投资学课程案例报告.docx
-codex-pdf-inspect docs/案例报告/AI投资学课程案例报告.pdf
 ```
 
 ## 数据集摘要
@@ -137,7 +127,6 @@ codex-pdf-inspect docs/案例报告/AI投资学课程案例报告.pdf
 | `src/reproduce_spo_paper.py` | 训练 Ridge PtO、PyEPO SPO+，生成策略权重和回测收益 |
 | `src/generate_ai_risk_profiles.py` | 生成低、中、高三档 AI 风险组合并程序化校验 |
 | `test/backtest_existing_models.py` | 独立复算净值、回撤、成本敏感性、特征重要性和未来函数审计 |
-| `scripts/generate_case_report.py` | 生成正式案例报告 Markdown 和 DOCX |
 
 测试期为 2024-01-31 至 2026-04-29，共 28 个按月调仓样本。主报告采用 0.5% 单边交易成本。当前独立回测的主要结论是：`spo_plus_turnover_l2` 为综合评分最高的非基准策略，净总收益 106.36%、年化收益 36.41%、Sharpe 2.00、最大回撤 -7.38%；6ETF 等权组合仍是最强风险调整基准，净 Sharpe 2.51。
 
@@ -156,10 +145,6 @@ codex-pdf-inspect docs/案例报告/AI投资学课程案例报告.pdf
 | `test/backtest_outputs/backtest_summary.json` | 独立回测总摘要 |
 | `test/backtest_outputs/model_quality_ranking.csv` | 策略质量评分排序 |
 | `test/backtest_outputs/plots/` | 累计收益、回撤、热力图、特征重要性和绩效图 |
-
-## 文档格式
-
-正式报告采用 `Markdown 源稿 -> DOCX 可编辑稿 -> PDF 交付稿` 路线。报告生成器会设置 A4 页面、宋体正文、黑体标题、Times New Roman 英文、页码、图题、表题和代码附录。PDF 由本机文档工具链从 DOCX 导出。
 
 ## 注意事项
 

@@ -76,12 +76,10 @@ conda run -n etf-spo python src/reproduce_spo_paper.py
 conda run -n etf-spo python src/generate_ai_risk_profiles.py
 ```
 
-生成正式课程案例报告：
+运行独立回测与审计：
 
 ```bash
 conda run -n etf-spo python test/backtest_existing_models.py --cost-rate 0.005
-conda run -n etf-spo python scripts/generate_case_report.py
-codex-docx-to-pdf docs/案例报告/AI投资学课程案例报告.docx docs/案例报告
 ```
 
 可调参数：
@@ -130,9 +128,6 @@ conda run -n etf-spo python src/reproduce_spo_paper.py --epochs 240 --batch-size
 | `outputs/tables/ai_risk_profile_backtest_returns.csv` | AI 三档风险组合月度回测收益 |
 | `outputs/tables/ai_risk_profile_portfolios.json` | AI 输出的低/中/高风险组合 JSON |
 | `outputs/tables/ai_risk_profile_validation.json` | AI 输出校验结果 |
-| `docs/案例报告/AI投资学课程案例报告.md` | 正式案例报告 Markdown 源稿 |
-| `docs/案例报告/AI投资学课程案例报告.docx` | 正式案例报告 Word 可编辑稿 |
-| `docs/案例报告/AI投资学课程案例报告.pdf` | 正式案例报告 PDF 交付稿 |
 
 ## 6. 当前复现结果摘要
 

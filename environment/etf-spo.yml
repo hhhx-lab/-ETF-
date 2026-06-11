@@ -12,7 +12,6 @@ dependencies:
       - torch
       - yfinance
       - matplotlib
-      - python-docx
       - tqdm
       - pathos
       - clarabel

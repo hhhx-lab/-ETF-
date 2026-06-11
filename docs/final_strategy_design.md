@@ -133,8 +133,6 @@ conda env create -f environment/etf-spo.yml
 conda run -n etf-spo python src/reproduce_spo_paper.py
 conda run -n etf-spo python src/generate_ai_risk_profiles.py
 conda run -n etf-spo python test/backtest_existing_models.py --cost-rate 0.005
-conda run -n etf-spo python scripts/generate_case_report.py
-codex-docx-to-pdf docs/案例报告/AI投资学课程案例报告.docx docs/案例报告
 ```
 
 如果 `etf-spo` 环境已存在，可跳过 `conda env create`。
